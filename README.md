@@ -1,145 +1,75 @@
-# 🗺️ Desafio WAR Estruturado – Conquista de Territórios
+🧩 Sistema de Missões Estratégicas — Trabalho de Estrutura de Dados (C)
+👩‍💻 Desenvolvido por: Julia de Mattos Mioranza
 
-Bem-vindo ao **Desafio WAR Estruturado!** Inspirado no famoso jogo de estratégia, este desafio convida você a programar diferentes versões do jogo WAR, evoluindo seus conhecimentos em **C** à medida que avança pelos níveis **Novato**, **Aventureiro** e **Mestre**.
+Matéria: Estrutura de Dados
+Tema: Implementação de missões estratégicas no jogo estilo WAR
 
-A empresa **MateCheck** contratou você para criar uma versão estruturada do WAR. Cada nível propõe novas funcionalidades, conceitos e desafios de programação. **Você escolhe por onde começar!**
+🎯 Objetivo do Projeto
 
----
+A ideia principal desse trabalho é criar uma funcionalidade onde cada jogador recebe uma missão individual e secreta no início do jogo, sorteada automaticamente entre várias opções pré-definidas.
+Essas missões trazem uma camada extra de estratégia e tornam o jogo mais dinâmico, já que cada jogador tem um objetivo diferente para vencer.
 
-## 🧩 Nível Novato: Cadastro Inicial dos Territórios
+⚙️ O que o código faz
 
-### 🎯 Objetivo
+Cria um vetor de strings com diferentes descrições de missões.
 
-- Criar uma `struct` chamada `Territorio`.
-- Usar um **vetor estático de 5 elementos** para armazenar os territórios.
-- Cadastrar os dados de cada território: **Nome**, **Cor do Exército**, e **Número de Tropas**.
-- Exibir o estado atual do mapa.
+Sorteia uma missão aleatoriamente e atribui para cada jogador usando ponteiros.
 
-### ⚙️ Funcionalidades
+Armazena a missão dinamicamente com malloc.
 
-- Leitura de dados pelo terminal (`fgets` e `scanf`)
-- Impressão organizada dos dados de todos os territórios
+Verifica durante o jogo se a missão foi cumprida (de forma simples, só pra exemplo).
 
-### 💡 Conceitos abordados
+Exibe o mapa e permite simular ataques entre territórios.
 
-- `struct`
-- Vetor estático
-- Entrada/saída com `scanf`, `fgets`, e `printf`
+No final de cada rodada, o programa verifica se algum jogador venceu.
 
-### 📥 Entrada
+Tudo é feito de forma modular, com funções separadas e bem organizadas.
 
-O usuário digita o nome do território, a cor do exército dominante e o número de tropas para **cada um dos 5 territórios**.
+🧠 Estrutura usada
 
-### 📤 Saída
+struct Territorio → guarda nome, cor e quantidade de tropas.
 
+Vetor de missões → armazena textos com os objetivos possíveis.
 
+Ponteiros e alocação dinâmica (malloc, calloc, free) → usados para guardar as missões dos jogadores e o mapa.
 
-## 🧗‍♂️ Nível Aventureiro: Batalhas Estratégicas
+Funções bem divididas:
 
-### 🎯 Objetivo
+atribuirMissao() → sorteia e copia a missão para o jogador.
 
-- Substituir o vetor estático por **alocação dinâmica com `calloc`**
-- Criar uma função para **simular ataques entre dois territórios**
-- Utilizar números aleatórios para representar dados de batalha
+exibirMissao() → mostra a missão sorteada no início.
 
-### 🆕 Novidades em relação ao Nível Novato
+atacar() → simula uma batalha entre dois territórios.
 
-- Alocação dinâmica de memória com `calloc`
-- Uso de **ponteiros**
-- Laço interativo para o jogador escolher **territórios para atacar e defender**
-- Simulação de dados de ataque e defesa com `rand()`
+verificarMissao() → verifica se o jogador cumpriu sua missão.
 
-### ⚙️ Funcionalidades
+exibirMapa() → mostra o estado atual do jogo.
 
-- Cadastro dos territórios (como no Nível Novato)
-- Fase de ataque com:
-  - Escolha de atacante e defensor
-  - Dados de ataque/defesa
-  - Lógica:
-    - Se atacante vence → defensor perde 1 tropa
-    - Se defensor perde todas → território é conquistado
-    - Empates favorecem o atacante
+liberarMemoria() → libera tudo no final pra evitar vazamento de memória.
 
-### 💡 Conceitos abordados
+🕹️ Como funciona a simulação
 
-- Ponteiros
-- `calloc` / `free`
-- Aleatoriedade com `rand()` / `srand()`
-- Funções para modularização
+O jogo começa com 2 jogadores e 5 territórios.
 
-### 📥 Entrada
+Cada jogador recebe uma missão aleatória.
 
-- Território **atacante** (1 a 5)
-- Território **defensor** (1 a 5)
+É mostrado o mapa com as cores e tropas de cada território.
 
-### 📤 Saída
+A função atacar() faz uma simulação simples de batalha (usando rand() para o dado).
 
-Exibição do resultado da batalha, dados sorteados e mudanças no mapa.
+Depois do ataque, o jogo checa se alguém atingiu o objetivo da missão.
 
+Se sim, mostra a mensagem de vitória.
 
+💬 Detalhes técnicos importantes
 
-## 🧠 Nível Mestre: Missões e Modularização Total
+Bibliotecas usadas: stdio.h, stdlib.h, string.h, time.h.
 
-### 🎯 Objetivo
+Geração de números aleatórios com srand(time(NULL)).
 
-- Dividir o código em funções bem definidas
-- Implementar um **sistema de missões**
-- Verificar cumprimento da missão
-- Aplicar **boas práticas** (uso de `const`, modularização, etc.)
+Passagem de parâmetros por valor e referência.
 
-### 🆕 Diferenças em relação ao Nível Aventureiro
+Uso de strcpy, strcmp e strstr pra manipular strings.
 
-- Modularização total em funções
-- Missões aleatórias atribuídas:
-  1. Destruir o exército **Verde**
-  2. Conquistar **3 territórios**
-- Menu interativo com opções
+Ao final do programa, toda memória é liberada com free().
 
-### ⚙️ Funcionalidades
-
-- Inicialização automática dos territórios
-- Menu principal com 3 opções:
-  1. Atacar
-  2. Verificar Missão
-  3. Sair
-- Verificação de vitória da missão
-
-### 💡 Conceitos abordados
-
-- Modularização
-- `const` correctness
-- Estruturação em múltiplas funções
-- Passagem por referência
-
-### 📥 Entrada
-
-- Ações do jogador via menu:
-  - `1` - Atacar
-  - `2` - Verificar Missão
-  - `0` - Sair
-- Escolha de territórios para ataque
-
-### 📤 Saída
-
-- Mapa atualizado
-- Resultados das batalhas
-- Verificação da missão
-- Mensagem de vitória
-
-
-
-## 🏁 Conclusão
-
-Com este **Desafio WAR Estruturado**, você praticará fundamentos essenciais da linguagem **C** de forma **divertida e progressiva**.
-
-Cada nível foca em um conjunto de habilidades:
-
-- 🟢 **Novato**: `struct`, vetor, entrada/saída
-- 🔵 **Aventureiro**: ponteiros, memória dinâmica, lógica de jogo
-- 🟣 **Mestre**: modularização, design limpo, sistema de missões
-
-
-
-🚀 **Boa sorte! Avance nos níveis e torne-se um mestre da programação estratégica!**
-
-> Equipe de Ensino – MateCheck
